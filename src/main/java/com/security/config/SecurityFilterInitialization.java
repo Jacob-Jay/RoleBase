@@ -8,5 +8,5 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  * @since 2019-07-24 14:52
  * 容器初始化配置delegatingFilter
  */
-public class SecurityFilterInitialization /*extends AbstractSecurityWebApplicationInitializer */{
+public class SecurityFilterInitialization extends AbstractSecurityWebApplicationInitializer {
 }

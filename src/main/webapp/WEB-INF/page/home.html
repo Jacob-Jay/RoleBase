@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+welcome <span th:text="${session.userName}"> sad </span>
+
+<hr>
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="退出">
+</form>
+</body>
+</html>
