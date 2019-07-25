@@ -12,10 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.servlet.Filter;
 
 /**
  * @author Jiangqing
@@ -53,6 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private LogoutSuccessHandler logoutSuccessHandler;
 
 
+    //customFilter
+    @Autowired
+    @Qualifier("customFilterInterceptor")
+    private Filter accessfilter;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailService).passwordEncoder(new CustomPassEncode());
@@ -87,5 +96,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         //登出操作
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
+
+
+        http.addFilterBefore(accessfilter, FilterSecurityInterceptor.class);
     }
+
+
 }
