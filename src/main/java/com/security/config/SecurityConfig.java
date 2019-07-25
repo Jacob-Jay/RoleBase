@@ -15,6 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  * @author Jiangqing
@@ -33,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private AuthenticationSuccessHandler successHandler;
 
+
+    //rememberMe
+    @Autowired
+    @Qualifier("customPersistentTokenRepository")
+    private PersistentTokenRepository persistentTokenRepository;
 
     //access
     @Autowired
@@ -65,6 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .loginPage("/").loginProcessingUrl("/login/DoLogin")
                 .failureHandler(failHandler).successHandler(successHandler).permitAll();
 
+        //记住我
+        http.rememberMe().rememberMeParameter("remember-me").userDetailsService(userDetailsService())
+                .tokenRepository(persistentTokenRepository);
 
 
         //非法处理全部放行
