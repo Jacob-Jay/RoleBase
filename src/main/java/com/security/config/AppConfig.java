@@ -43,14 +43,14 @@ public class AppConfig {
     private String name;
     @Value("${jdbc.password}")
     private String password;
-    @Value("${pool.init}")
-    private int initSize;
-    @Value("${pool.min}")
-    private int min;
-    @Value("${pool.max}")
-    private int max;
-    @Value("${pool.getSize}")
-    private int newSize;
+//    @Value("${pool.init}")
+//    private int initSize;
+//    @Value("${pool.min}")
+//    private int min;
+//    @Value("${pool.max}")
+//    private int max;
+//    @Value("${pool.getSize}")
+//    private int newSize;
 
 
 
@@ -58,10 +58,10 @@ public class AppConfig {
     @Bean
     public DataSource dataSource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setMinPoolSize(min);
-        dataSource.setMaxPoolSize(max);
-        dataSource.setInitialPoolSize(initSize);
-        dataSource.setAcquireIncrement(newSize);
+//        dataSource.setMinPoolSize(min);
+//        dataSource.setMaxPoolSize(max);
+//        dataSource.setInitialPoolSize(initSize);
+//        dataSource.setAcquireIncrement(newSize);
         dataSource.setUser(name);
         dataSource.setPassword(password);
         dataSource.setJdbcUrl(url);
